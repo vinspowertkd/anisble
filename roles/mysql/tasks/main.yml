@@ -1,0 +1,37 @@
+---
+
+ - name: Download MySQL Community Repo
+   get_url:
+     url: "{{ mysql_link }}"
+     dest: /tmp
+
+ - name: Install MySQL Community Repo
+   yum:
+     name: "/tmp/{{ mysql_rpm }}"
+     state: present
+
+ - name: Install MySQL packages
+   yum: 
+     name: "{{ packages }}" 
+     state: present
+
+ - name: Start MySQL Server and enable it
+   service: 
+     name: mysqld 
+     state: started 
+     enabled: yes
+
+ - name: Remove Test database if it exist.
+   mysql_db:
+     login_user: "{{ db_username }}"
+     login_password: "{{ db_password }}"
+     name: test 
+     state: absent
+
+ - name: Create a new database with name 'bobdata'
+   mysql_db:
+     login_user: "{{ db_username }}"
+     login_password: "{{ db_password }}"
+     name: "{{ db_name }}"
+     state: present
+ 

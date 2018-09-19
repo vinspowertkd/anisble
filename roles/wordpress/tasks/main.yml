@@ -1,0 +1,4 @@
+---
+  - name: install wordpress
+    import_tasks: wordpress.yaml
+

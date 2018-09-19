@@ -1,0 +1,4 @@
+---
+- name: enable-httpd
+  service: name=httpd enabled=yes state=restarted
+# handlers file for wordpress

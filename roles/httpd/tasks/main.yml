@@ -1,0 +1,10 @@
+---
+
+- name: Install httpd
+  import_tasks: install.yml
+
+- name: Copying index.html file
+  import_tasks: copyindex.yml
+
+- name: starting file
+  import_tasks: service.yml 

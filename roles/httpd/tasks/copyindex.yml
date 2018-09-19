@@ -1,0 +1,9 @@
+---
+- name: Copying the demo file
+  copy:
+    src: index.html
+    dest: /var/www/html
+    owner: apache
+    group: apache
+    mode: 0644
+  tags: copy-index

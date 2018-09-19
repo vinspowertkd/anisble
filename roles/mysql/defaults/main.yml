@@ -1,0 +1,8 @@
+---
+
+mysql_rpm: mysql-community-release-el7-7.noarch.rpm
+mysql_link: "http://repo.mysql.com/{{ mysql_rpm }}"
+packages:
+  - mysql-server
+  - MySQL-python
+db_name: wordpress

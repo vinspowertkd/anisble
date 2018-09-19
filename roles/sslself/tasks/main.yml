@@ -1,0 +1,5 @@
+---
+# tasks file for sslself
+ 
+- name: import
+  import_tasks: sslself.yml

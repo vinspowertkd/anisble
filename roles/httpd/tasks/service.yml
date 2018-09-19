@@ -1,0 +1,7 @@
+---
+- name: Enable it on System Boot
+  service:
+    name: httpd
+    enabled: yes
+    state: started
+  tags: service

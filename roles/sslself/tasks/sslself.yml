@@ -1,0 +1,46 @@
+---
+
+#  - name: Download pexpect
+#    unarchive:
+#      src: http://pexpect.sourceforge.net/pexpect-2.3.tar.gz
+#      dest: /tmp
+#      remote_src: yes
+
+#  - name: exec script
+#    command: cd /tmp/pexpect-2.3 | python ./setup.py 
+
+#  - name: 
+#    yum: 
+#      name: pexpect.noarch
+#      state: latest
+
+  - name: Install pip
+    yum:
+      name: python-pip
+      state: latest
+
+  - name: Install pexpect
+    pip:
+      name: pexpect
+  
+  - name: yum install mod_ssl
+    yum: 
+      name: mod_ssl
+      state: latest
+
+  - name: Case insensitive password string match
+    expect:
+      command: openssl req -new -x509 -nodes -out /etc/pki/tls/certs/learnitguide.net.crt -keyout /etc/pki/tls/private/learnitguide.net.key -days 365
+      responses:
+        Country Name \(2 letter code\) \[XX\]:: 'in'
+        State or Province Name \(full name\) \[\]:: 'chd'
+        Locality Name \(eg, city\) \[Default City\]:: 'chd'
+        Organization Name \(eg, company\) \[Default Company Ltd\]:: 'test'
+        Organizational Unit Name \(eg, section\) \[\]:: 'it'
+        Common Name \(eg, your name or your server's hostname\) \[\]:: 'test-server'
+        Email Address \[\]:: 'test@test.com'
+    tags: ssl-cert
+
+  - name: enable httpd
+    service: name=httpd enabled=yes state=started
+                                                

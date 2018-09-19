@@ -1,0 +1,14 @@
+---
+  - name: Download WordPress
+    get_url:
+      url: "http://wordpress.org/wordpress-{{ wp_version }}.tar.gz" 
+      dest: /var/www/html
+      sha256sum: c1856cf969b1e73025ba2c681491908c3a4a6c5a2333f4531bf9bfb90f634380
+
+  - name: Extract archive
+    shell: /bin/tar xvf "wordpress-{{ wp_version }}.tar.gz" ; chown -R apache:apache /var/www/html/wordpress  
+    creates: /var/www/html/wordpress
+    args:
+      chdir: /var/www/html
+    notify: enable-httpd
+ 

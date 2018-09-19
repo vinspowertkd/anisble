@@ -1,0 +1,6 @@
+---
+ - name: Installing Latest version of Apache
+   yum:
+     pkg: httpd
+     state: latest
+   tags: install-httpd

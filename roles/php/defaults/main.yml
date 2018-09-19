@@ -1,0 +1,20 @@
+---
+
+remi_repo_rpm: remi-release-7.rpm
+remi_repo_url: "http://rpms.famillecollet.com/enterprise/{{ remi_repo_rpm }}"
+php_packages:
+  - php-mysql
+  - php-pear 
+  - php
+  - php-pdo
+  - php-pecl-redis
+  - php-xml
+  - php-pecl-zip
+  - php-pecl-jsonc
+  - php-pecl-igbinary
+  - httpd
+  - httpd-tools
+  - php-mbstring
+
+
+# defaults file for php

@@ -1,0 +1,8 @@
+---
+  lamp:
+    hosts:
+      35.164.244.129:
+    vars:
+      wp_version: 4.6
+      db_username: root
+      db_password: 12345

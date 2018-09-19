@@ -1,0 +1,76 @@
+---
+
+  - name: yum update
+    yum: 
+      name: "*"
+      state: latest
+  
+  - name: yum install epel
+    yum:
+      name: epel-release.noarch 
+      state: latest
+  
+  - name: download remi repo rpm
+    get_url:
+      url: "{{ remi_repo_url }}" 
+      dest: /root/  
+  
+  - name: install remi repo rpm
+    yum: 
+      name: "/root/{{ remi_repo_rpm }}" 
+      state: present
+
+  - name: install php
+    yum: 
+      enablerepo: remi,remi-php56
+      name: "{{ php_packages }}"
+      state: latest
+  
+  - name: install rsync
+    yum: 
+      name: rsync 
+      state: latest
+  
+  - name: change web root permission
+    sudo: yes
+    file: 
+      path: /var/www 
+      group: apache 
+      mode: 0770 
+      state: directory
+  
+  - name: change web root permission
+    sudo: yes
+    file: 
+      path: /var/www/html 
+      group: apache 
+      mode: 0770 
+      state: directory
+  
+  - name: change user permission
+    sudo: yes
+    user: 
+      name: myuser 
+      groups: apache
+  
+  - name: change php ini
+    ini_file:
+      dest: /etc/php.ini
+      section: Date
+      option: date.timezone
+      value: Etc/UTC
+  - name: make updates
+    ini_file:
+      dest: /etc/php.ini
+      section: PHP
+      option: error_reporting
+      value: 'E_ALL & ~E_NOTICE'
+
+  - ini_file:
+      dest: /etc/php.ini
+      section: PHP
+      option: short_open_tag
+      value: On
+
+  - name: enable httpd
+    service: name=httpd enabled=yes state=started

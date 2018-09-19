@@ -1,0 +1,25 @@
+---
+- hosts: 35.162.176.9
+  gather_facts: false
+  remote_user: centos
+  become: true
+  become_user: root
+  tasks:
+    - name: Installing Latest version of Apache
+      yum: 
+        pkg: httpd 
+        state: latest
+
+    - name: Copying the demo file
+      template: 
+        src: /ansibleplaybook/index.html 
+        dest: /var/www/html
+        owner: apache 
+        group: apache 
+        mode: 0644
+
+    - name: Enable it on System Boot
+      service: 
+        name: httpd 
+        enabled: yes
+        state: started

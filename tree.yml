@@ -1,0 +1,11 @@
+---
+- hosts: Centos7
+#use priviledge (default : root)
+  become: yes
+     # the way to use priviledge
+  become_method: sudo
+    # define tasks
+  tasks:
+    - name: tree is installed
+      yum: name=tree state=installed
+

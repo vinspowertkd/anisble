@@ -1,0 +1,9 @@
+---
+- hosts: 35.164.244.129
+  gather_facts: false
+  remote_user: centos
+  become: true
+  become_user: root
+  roles: [  httpd ]
+        
+    
